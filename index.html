@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bmi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css&quot; rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+html {
+  height:100%;
+}
+
+body {
+  margin:0;
+  font-family:monospace;
+}
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, rgb(46, 0, 253) 50%, rgb(0, 119, 255) 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
+.container{
+    
+    -webkit-animation: bgcolor 10s infinite;
+    animation: bgcolor 10s infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    
+}
+input{
+    border: solid 1px black;
+    background: transparent;
+    border-radius: 5px;
+    margin: auto;
+}
+.button {
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #8afff9 0%, #0099ff  51%, #0044ff  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  text-align: center;
+
+}
+
+.button:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+#suly{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#magassag{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h4{
+    padding: 5px;
+}
+</style>
+<body>
+    <div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="container">
+    <div>
+        <h1 style="text-align: center;">Bmi Calculator</h1>
+        <div><h3>Weight(kg)</h3>
+            <input type="text" id="suly">
+
+        </div>
+        <div><h3>Height(cm)</h3>
+            <input type="text" id="magassag">
+        </div>
+    </div>
+        <input class="button" role="button" type="button" id="calc" value="Calculate" onclick="calc()">
+    <div id="eredmeny"><h2></h2></div>
+</div>
+    <script>
+        const rules =[
+        {min:0,max:18.5,categ:'underweight',emoji:'💀'},
+        {min:18.5,max:25,categ:'normal',emoji:'😁'},
+        {min:25,max:30,categ:'owerweight',emoji:'🍗'},
+        {min:30,max:35,categ:'obese',emoji:'😨'},
+        {min:35,max:10000,categ:'extreme obese',emoji:'💀'}
+        ]
+        function calc(){
+        let suly = document.getElementById('suly').value
+        let magassag = document.getElementById('magassag').value
+        let negyzet = magassag*magassag
+        let bmi = (suly/negyzet*10000).toFixed(2)
+        let result=rules.find(obj=> bmi > obj.min && bmi<=obj.max)
+        console.log(result)
+        document.querySelector('#eredmeny').innerHTML = `<h3 id="torolni"> BMI:${result.categ} ${result.emoji}</h3>`
+    }
+    </script>
+</body>
+</html>
