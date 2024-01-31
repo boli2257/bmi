@@ -135,13 +135,21 @@ h4{
         {min:35,max:10000,categ:'extreme obese',emoji:'💀'}
         ]
         function calc(){
+        
         let suly = document.getElementById('suly').value
         let magassag = document.getElementById('magassag').value
+        if(!suly || !magassag || magassag == 0 || suly==0){
+        return  
+        } 
         let negyzet = magassag*magassag
         let bmi = (suly/negyzet*10000).toFixed(2)
         let result=rules.find(obj=> bmi > obj.min && bmi<=obj.max)
         console.log(result)
-        document.querySelector('#eredmeny').innerHTML = `<h3 id="torolni"> BMI:${result.categ} ${result.emoji}</h3>`
+        document.querySelector('#eredmeny').innerHTML = `<h3> BMI:${result.categ} ${result.emoji}</h3>`
+     
+    if(!suly || !magassag || magassag == 0 || suly==0){
+          return  
+        }   
     }
     </script>
 </body>
